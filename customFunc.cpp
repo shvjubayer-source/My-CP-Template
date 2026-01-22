@@ -290,16 +290,6 @@ void print_vect(const vector<int>& v){
     cout<<endl;
 }
 
-bool isPalindrome(const vector<int>& v){
-    int l=0, r=v.size()-1;
-    while(l<r){
-        if(v[l]!=v[r])
-            return false;
-        l++;
-        r--;
-    }
-    return true;
-}
 
 //binary search
 int lower_bound_my(vector<int>& arr, int x){
