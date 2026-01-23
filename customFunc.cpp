@@ -346,6 +346,20 @@ vector<pair<int,int>> getUnion(int a, int b, int c, int d){
 }
 
 
+vector<string> permutations(string s){
+    vector<string> ans;
+
+    sort(all(s));
+    
+    do{
+        ans.push_back(s);
+    }while(next_permutation(all(s)));
+
+
+    return ans;
+}
+
+
 
 
 //to find element <= use upperbound if(it!=a.begin()) it-- else "not found";
