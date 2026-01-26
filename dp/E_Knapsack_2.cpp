@@ -1,5 +1,3 @@
-//how many ways to construct n by throwing dice of 1 to 6
-//https://cses.fi/problemset/task/1633
 #include <bits/stdc++.h>
 using namespace std;
 #define f(i, st, ed) for(int i=st; i<=ed; i++)
@@ -16,6 +14,7 @@ using namespace std;
 #define edge(v) g[v].size()
 #define yes cout<<"YES\n"
 #define no cout<<"NO\n"
+#define nl '\n'
 #define pvec(a) do{for(auto &x:a) cout<<x<<" "; cout<<endl;}while(0)
 //bit manipulation
 #define checkbit(x,n) (x&(1LL<<n))
@@ -24,26 +23,45 @@ using namespace std;
 #define togglebit(x,n) (x=(x^(1LL<<n)))
 
 const ll M = 1000000007;
-const int N = 1e6+10;
-vll dp(N, -1);
 
-ll solverX(int n){
-    if(n==0) return 1;
-    if(dp[n]!=-1) return dp[n];
+int wt[105], val[105];
 
-    ll ans=0;
-    f(i, 1, 6) if(n-i>=0) ans=(ans+solverX(n-i))%M;
-    return dp[n] = ans;
+ll dp[105][100005];
+
+ll solverX(int idx, int value_left){ //this function returns minimum weight requires to achieve value
+    if(value_left==0) return 0;
+    if(idx<1) return INT_MAX;
+
+    if(dp[idx][value_left]!=-1) return dp[idx][value_left];
+
+
+    //don't choose
+    ll ans=solverX(idx-1, value_left);
+
+    //choose
+    if(value_left-val[idx]>=0){
+        ans=min(ans, solverX(idx-1, value_left-val[idx])+wt[idx]);
+    }
+
+    return dp[idx][value_left]=ans;
 }
 
-
-
-
 void solve(){
-    int n;
-    cin>>n;
+    memset(dp, -1, sizeof(dp));
 
-    cout<<solverX(n)<<endl;
+    int n, w;
+    cin>>n>>w;
+
+    f(i, 1, n) cin>>wt[i]>>val[i];
+
+    int max_val=1e5;
+    for(int i=max_val; i>=0; i--){
+        if(solverX(n, i)<=w){
+            cout<<i<<nl;
+            return;
+        }
+    }
+
 
 }
 
@@ -52,25 +70,3 @@ int main(){
     solve();
     return 0;
 }
-
-
-// void solve(){
-//     int n;
-//     cin>>n;
-
-//     vll dp(N, 0);
-//     dp[0]=1;
-//     f(i, 1, n){
-//         f(j, 1, 6){
-//             if(i-j>=0) dp[i]=(dp[i]+dp[i-j])%M;
-//         }
-//     }
-
-
-//     cout<<dp[n]<<endl;
-// }
-
-
-// int main(){
-//     solve();
-// }
