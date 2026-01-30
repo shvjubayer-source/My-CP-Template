@@ -1,4 +1,4 @@
-//https://atcoder.jp/contests/dp/tasks/dp_e
+// https://codeforces.com/contest/2188/problem/C
 #include <bits/stdc++.h>
 using namespace std;
 #define f(i, st, ed) for(int i=st; i<=ed; i++)
@@ -25,49 +25,53 @@ using namespace std;
 
 const ll M = 1000000007;
 
-int wt[105], val[105];
 
-ll dp[105][100005];
-
-ll solverX(int idx, int value_left){ //this function returns minimum weight requires to achieve value
-    if(value_left==0) return 0;
-    if(idx<1) return INT_MAX;
-
-    if(dp[idx][value_left]!=-1) return dp[idx][value_left];
-
-
-    //don't choose
-    ll ans=solverX(idx-1, value_left);
-
-    //choose
-    if(value_left-val[idx]>=0){
-        ans=min(ans, solverX(idx-1, value_left-val[idx])+wt[idx]);
+bool isSortedIncreasing(vi a, int n){
+    for(int i=0; i<n-1; i++){
+        if(a[i]>a[i+1]){
+            return false;
+        }
     }
-
-    return dp[idx][value_left]=ans;
+    return true;
 }
 
+
+
+
 void solve(){
-    memset(dp, -1, sizeof(dp));
+    int n;
+    cin>>n;
+    vi a(n), b(n);
+    f(i, 0, n-1) cin>>a[i], b[i]=a[i];
 
-    int n, w;
-    cin>>n>>w;
+    sort(all(b));
 
-    f(i, 1, n) cin>>wt[i]>>val[i];
+    int ok=1;
+    int mx=b.back(), mn=b[0];
+    int ans=INT_MAX;
 
-    int max_val=1e5;
-    for(int i=max_val; i>=0; i--){
-        if(solverX(n, i)<=w){
-            cout<<i<<nl;
-            return;
+
+    f(i, 0, n-1){
+        if(b[i]!=a[i]){
+            ok=0;
+            
+            ans=min(ans, max({mx-a[i], a[i]-mn}));
         }
     }
 
+    if(ok){
+        cout<<-1<<nl;
+        return;
+    }
+
+
+
+    cout<<ans<<nl;
 
 }
 
 int main(){
     fastio;
-    solve();
+    test solve();
     return 0;
 }
