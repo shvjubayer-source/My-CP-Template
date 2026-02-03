@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/2094/E
 #include <bits/stdc++.h>
 using namespace std;
 #define f(i, st, ed) for(int i=st; i<=ed; i++)
@@ -27,7 +28,44 @@ const ll M = 1000000007;
 
 
 void solve(){
-    
+    int n;
+    cin>>n;
+    vi a(n);
+    f(i, 0, n-1) cin>>a[i];
+
+    int mx=*max_element(all(a));
+    int mxlength=32-__builtin_clz(mx);
+
+    ll ans=0;
+
+    map<int,int> freq;
+
+    f(i, 0, n-1){
+        for(int j=mxlength-1; j>=0; j--){
+            if(checkbit(a[i], j)){
+                freq[j]++;
+            }
+        }
+    }
+
+    int val=a[0];
+
+    f(i, 0, n-1){
+        ll temp_ans=0;
+
+        for(int j=mxlength-1; j>=0; j--){
+            if(checkbit(a[i], j)){
+                temp_ans+=1LL*(n-freq[j])*(1LL<<j);
+            }else{
+                temp_ans+=1LL*freq[j]*(1LL<<j);
+            }
+        }
+
+        ans=max(ans, temp_ans);
+    }   
+
+    // watch(val);
+    cout<<ans<<nl;
 }
 
 int main(){
