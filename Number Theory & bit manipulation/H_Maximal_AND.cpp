@@ -1,4 +1,4 @@
-// https://codeforces.com/problemset/problem/2091/D
+// https://codeforces.com/problemset/problem/1669/H
 #include <bits/stdc++.h>
 using namespace std;
 #define f(i, st, ed) for(int i=st; i<=ed; i++)
@@ -7,7 +7,6 @@ using namespace std;
 #define test int t; cin>>t; while(t--)
 #define gcin(s) getline(cin, s);
 #define vi vector<int>
-
 #define vll vector<long long>
 #define pb push_back
 #define all(v) v.begin(), v.end()
@@ -26,28 +25,34 @@ using namespace std;
 
 const ll M = 1000000007;
 
-bool helper(int n, int x){
 
-}
 
 void solve(){
-    int n, m, k;
-    cin>>n>>m>>k;
+    int n, k;
+    cin>>n>>k;
 
-    int blocks=(k+n-1)/n;
-    
-    int l=0, r=1e9+100;
-    while(l<r){
-        int mid=l+(r-l)/2;
-        int used=(m/(mid+1))*mid;
-        int remaining=max(0, blocks-used);        
-        int M=m%(mid+1);
-
-        if(M>=remaining) r=mid;
-        else l=mid+1;
+    vi a(n), temp(31);
+    f(i, 0, n-1){
+        cin>>a[i];
+        f(j, 0, 30){
+            if(checkbit(a[i], j)){
+                temp[j]++;
+            }
+        }
     }
 
-    cout<<l<<nl;
+    for(int i=30; i>=0 && k; i--){
+        int need=n-temp[i];
+        if(k>=need){
+            temp[i]=n;
+            k-=need;
+        }
+    }
+
+    int mask=0;
+    f(i, 0, 30) if(temp[i]==n) setbit(mask, i);
+
+    cout<<mask<<nl;
 }
 
 int main(){

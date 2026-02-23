@@ -1,4 +1,4 @@
-// https://codeforces.com/problemset/problem/2091/D
+// https://codeforces.com/contest/2192/problem/C
 #include <bits/stdc++.h>
 using namespace std;
 #define f(i, st, ed) for(int i=st; i<=ed; i++)
@@ -7,7 +7,6 @@ using namespace std;
 #define test int t; cin>>t; while(t--)
 #define gcin(s) getline(cin, s);
 #define vi vector<int>
-
 #define vll vector<long long>
 #define pb push_back
 #define all(v) v.begin(), v.end()
@@ -26,28 +25,45 @@ using namespace std;
 
 const ll M = 1000000007;
 
-bool helper(int n, int x){
 
-}
 
 void solve(){
-    int n, m, k;
-    cin>>n>>m>>k;
+    ll n, h, k;
+    cin>>n>>h>>k;
 
-    int blocks=(k+n-1)/n;
-    
-    int l=0, r=1e9+100;
-    while(l<r){
-        int mid=l+(r-l)/2;
-        int used=(m/(mid+1))*mid;
-        int remaining=max(0, blocks-used);        
-        int M=m%(mid+1);
+    vll a(n+1), sufMax(n+2);
+    f(i, 1, n) cin>>a[i];
+    for(int i=n; i>=1; i--) sufMax[i]=max(sufMax[i+1], a[i]);
 
-        if(M>=remaining) r=mid;
-        else l=mid+1;
+    ll sum=accumulate(all(a), 0LL);
+
+    if(h%sum==0){
+        cout<<(h/sum)*n+(h/sum-1)*k<<nl;
+        return;
     }
 
-    cout<<l<<nl;
+    ll ans=(h/sum)*(n+k);
+    h=h%sum;
+
+    sum=0;
+    ll mn=INT_MAX;
+    
+    f(i, 1, n){
+        sum+=a[i];
+        mn=min(mn, a[i]);
+        if(sufMax[i+1]>mn) sum=sum+sufMax[i+1]-mn;
+
+
+        if(sum>=h){
+            ans+=i;
+            break;
+        }
+
+        if(sufMax[i+1]>mn) sum=sum-sufMax[i+1]+mn;
+    }
+
+
+    cout<<ans<<nl;
 }
 
 int main(){
