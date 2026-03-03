@@ -220,6 +220,11 @@ int bitlength=32-__builtin_clz(n) //this and the above function returns the leng
 
 
 //Others
+
+v.erase(unique(v.begin(), v.end()), v.end());
+int n=v.size() //after unique-erase this will give length
+
+
 void Kadanes(){
     int n;
     cin>>n;
