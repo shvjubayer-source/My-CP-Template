@@ -25,8 +25,6 @@ using namespace std;
 
 
 
-
-
 ll powerMod(ll a, ll b){
     if(b==0) return 1;
 
@@ -219,6 +217,7 @@ int bitlength=32-__builtin_clz(n) //this and the above function returns the leng
 
 
 
+
 //Others
 
 v.erase(unique(v.begin(), v.end()), v.end());
@@ -251,7 +250,9 @@ void Kadanes(){
     cout<<maxSum<<endl;
 }
 
-bool isSortedIncreasing(int a[], int n){
+bool isSortedIncreasing(vi &a){
+    int n=a.size();
+    
     for(int i=0; i<n-1; i++){
         if(a[i]>a[i+1]){
             return false;
@@ -259,6 +260,7 @@ bool isSortedIncreasing(int a[], int n){
     }
     return true;
 }
+
 
 bool balanced_checker(string s){
     int b=0;
