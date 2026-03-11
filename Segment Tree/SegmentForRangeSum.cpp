@@ -13,7 +13,13 @@ struct SegTree {
         tree.assign(4*n, 0);
     }
 
-    // Build from array
+    SegTree(vector<int> &a){
+        this->n=a.size();
+        tree.assign(4*n, 0);
+        build(a);
+    }
+
+
     void build(vector<long long> &a, int idx, int l, int r) {
         if (l == r) {
             tree[idx] = a[l];
@@ -22,7 +28,7 @@ struct SegTree {
         int mid = (l + r) / 2;
         build(a, idx*2, l, mid);
         build(a, idx*2+1, mid+1, r);
-        tree[idx] = tree[idx*2] + tree[idx*2+1];
+        tree[idx] = tree[idx*2]+tree[idx*2+1];
     }
 
     void build(vector<long long> &a) {
@@ -45,10 +51,10 @@ struct SegTree {
         update(1, 0, n-1, pos, val);
     }
 
-    // Range sum query
+
     long long query(int idx, int l, int r, int ql, int qr) {
-        if (qr < l || ql > r) return 0;  // no overlap
-        if (ql <= l && r <= qr) return tree[idx];  // total overlap
+        if (qr < l || ql > r) return 0;  
+        if (ql <= l && r <= qr) return tree[idx]; 
         int mid = (l + r) / 2;
         return query(idx*2, l, mid, ql, qr) +
                query(idx*2+1, mid+1, r, ql, qr);
