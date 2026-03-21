@@ -14,7 +14,7 @@ using namespace std;
 #define edge(v) g[v].size()
 #define yes cout<<"YES\n"
 #define no cout<<"NO\n"
-#define nl '\n'
+#define nl endl
 #define pvec(a) do{for(auto &x:a) cout<<x<<" "; cout<<endl;}while(0)
 //bit manipulation
 #define checkbit(x,n) (x&(1LL<<n))
