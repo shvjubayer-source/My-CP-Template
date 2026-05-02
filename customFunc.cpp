@@ -103,9 +103,9 @@ int multiplyMyFunc(int n, int x){
 int multiIter(int n, int x){
     int result=1;
     while(x>0) {
-        if(x%2==1) result*=n;
-        n*=n;
-        x/=2;
+        if(x%2==1) result=result * n;
+        n=n*n;
+        x=x/2;
     }
     return result;
 }
