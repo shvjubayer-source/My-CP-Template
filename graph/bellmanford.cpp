@@ -57,18 +57,17 @@ void bellmanFord(vector<vector<pair<int, int>>> &g, int source) {
 
 
 int main(){
-    int V = 5;
-    vector<vector<pair<int,int>>> g(V);
+    int n, m;
+    cin>>n>>m;
+    vector<vector<pair<int,int>>> g(n+1);
 
-    // g[u].push_back({v, weight});
-    g[0].push_back({1, -1});
-    g[0].push_back({2, 4});
-    g[1].push_back({2, 3});
-    g[1].push_back({3, 2});
-    g[1].push_back({4, 2});
-    g[3].push_back({2, 5});
-    g[3].push_back({1, 1});
-    g[4].push_back({3, -3});
+    
+    for(int i=1; i<=m; i++){
+        int v1, v2, wt;
+        cin>>v1>>v2>>wt;
+        
+        g[v1].push_back({v2, wt});
+    }
 
     bellmanFord(g, 0);
 
