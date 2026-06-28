@@ -24,6 +24,7 @@ int main(){
     }
 
     int dis[n+1];
+    
     for(int i=1; i<=n; i++) dis[i]=INT_MAX;
 
     int src=1;
