@@ -1,0 +1,1 @@
+{"name":"Local: SSSPonlineB","url":"d:\\Github\\My CP Templates\\graph\\SSSPonlineB.cpp","tests":[{"id":1782654625134,"input":"6 6\n1 2 8\n3 5 4\n2 4 4\n4 6 6\n1 3 10\n5 6 6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Github\\My CP Templates\\graph\\SSSPonlineB.cpp","group":"local","local":true}

@@ -218,6 +218,7 @@ int bitlength=32-__builtin_clz(n) //this and the above function returns the leng
 
 
 
+
 //Others
 
 v.erase(unique(v.begin(), v.end()), v.end());
@@ -383,3 +384,25 @@ int main(){
 
     return 0;
 }
+
+
+//mod related
+const ll M=1000000007;
+
+ll add(ll a, ll b, ll m=M) { return ((a%m) + (b%m) + m) % m;} // (a+b)%m
+ll sub(ll a, ll b, ll m=M) { return ((a%m) - (b%m) + m) % m;} // (a-b)%m
+ll mul(ll a, ll b, ll m=M) { return ((a%m) * (b%m)) % m;}     // (a*b)%m
+
+ll modexp(ll a, ll e, ll m=M){ // (a^e)%m
+    a%=m; ll r=1;
+
+    while(e){
+        if(e&1) r=mul(r, a, m);
+        a=mul(a, a, m);
+        e>>=1;
+    }
+
+    return r;
+}
+
+ll inv(ll a, ll m=M) { return modexp(a, m-2, m);} // (a^-1)%m
