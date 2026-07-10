@@ -65,7 +65,8 @@ int main(){
         g[u].push_back({v, wt});
     }
 
-    vector<int> dist0(n+1,INF), dist1(n+1,INF);
+    vector<int> dist0(n+1,INF); //without using discount
+    vector<int> dist1(n+1,INF); //using discount
 
 
 

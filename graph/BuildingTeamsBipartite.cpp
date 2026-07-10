@@ -43,7 +43,7 @@ void bfs(int source){
             if(!visited[child]){
                 q.push(child);
                 visited[child]=true;
-                level[child]=level[cur_v]+1;
+                level[child]=level[cur_v]^1;
             }else{
                 if(level[child]==level[cur_v]){
                     ok=false;
@@ -69,6 +69,7 @@ void solve(){
     f(i, 1, n){
         if(!visited[i]){
             bfs(i);
+            if(!ok) break;
         }
     }
  
