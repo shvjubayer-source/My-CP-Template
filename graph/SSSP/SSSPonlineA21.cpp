@@ -1,17 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5+10;
-
-
-
-
-
-
-
-
-
-
 
 int main(){
 
@@ -22,20 +11,26 @@ int main(){
 
     for(int i=1; i<=m; i++){
         int v1, v2, w;
+        cin>>v1>>v2>>w;
         g[v1].push_back({v2, w});
     }
 
-    int dis[n+1];
-    
-    for(int i=1; i<=n; i++) dis[i]=INT_MAX;
+    int source; cin>>source;
 
-    int src=1;
+    // cout<<"working"<<endl;
+
+    // int dis[n+1];
+    vector<int> dis(n+1, INT_MAX), parent(n+1, -1);
+
+
+    int src=source;
     dis[src]=0;
 
     priority_queue<pair<int,int>> pq;
 
     pq.push({0, src});
 
+    int ok=1;
 
     while(!pq.empty()){
         auto x = pq.top();
@@ -51,14 +46,22 @@ int main(){
             if(dis[v] > d+w){
                 dis[v]=d+w;
                 pq.push({-dis[v], v});
+                parent[v]=u;
             }
 
         }
+
+        if(u==source && ok==1){
+
+            dis[u]=INT_MAX; 
+            ok=2;
+        }
     }
 
-    for(int i=1; i<=n; i++){
-        cout<<i<<' '<<dis[i]<<endl;
-    }
+
+    cout<<dis[source]<<endl;
+
+    // vector<
 
 
 
