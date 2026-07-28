@@ -8,12 +8,13 @@ const int MAX = 100;
 int capacity[MAX][MAX];
 int parent[MAX];
 int n;
+int m;
 
 // Find an augmenting path using BFS
 bool bfs(int s, int t)
 {
-    bool visited[MAX];
-    memset(visited, false, sizeof(visited));
+
+    vector<bool> visited(MAX, false);
 
     queue<int> q;
     q.push(s);
@@ -72,19 +73,22 @@ int maxFlow(int source, int sink)
     return flow;
 }
 
-int main()
-{
-    cin >> n;
+int main(){
 
-    // Input capacity matrix
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++)
-            cin >> capacity[i][j];
+    cin>>n>>m;
 
-    int source, sink;
-    cin >> source >> sink;
+    for(int i=1; i<=m; i++){
+        int u, v, wt;
+        cin>>u>>v>>wt;
+        capacity[u][v]=wt;
+    }
 
-    cout << "Maximum Flow = " << maxFlow(source, sink) << endl;
+    int s, t;
+    cin>>s>>t;
+    // s=0;
+    // t=n-1;
+
+    cout<<maxFlow(s, t)<<endl;
 
     return 0;
 }

@@ -4,15 +4,6 @@ using namespace std;
 const int N = 1e5+10;
 
 
-
-
-
-
-
-
-
-
-
 int main(){
 
     int n, m;
@@ -59,9 +50,6 @@ int main(){
     for(int i=1; i<=n; i++){
         cout<<i<<' '<<dis[i]<<endl;
     }
-
-
-
 
     return 0;
 }
