@@ -1,0 +1,1 @@
+{"name":"Local: oneline23batchB","url":"d:\\Github\\My CP Templates\\graph\\Flow\\oneline23batchB.cpp","tests":[{"id":1785404834346,"input":"4 5\n1 2 5\n1 3 5\n2 3 5\n2 4 5\n3 4 5\n2\n2 3 100\n1 4 100","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Github\\My CP Templates\\graph\\Flow\\oneline23batchB.cpp","group":"local","local":true}

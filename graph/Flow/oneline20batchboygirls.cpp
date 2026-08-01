@@ -1,3 +1,5 @@
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -15,16 +17,23 @@ void addEdge(int u, int v, int cap){
     graph[v].push_back({u, 0, (int)graph[u].size()-1});
 }
 
-Edge* give_edge1(int u, int v){
+Edge& give_edge1(int u, int v){
     for(auto &e : graph[u]){
         if(e.v == v)
-            return &e;
+            return e;
     }
 
-    return nullptr;
+    // throw runtime_error("Edge not found");
 }
 
+Edge& give_edge2(int u, int v, vector<vector<Edge>> &org_graph){
+    for(auto &e : org_graph[u]){
+        if(e.v == v)
+            return e;
+    }
 
+    // throw runtime_error("Edge not found");
+}
 bool bfs(int s, int t){
     for(auto &i:parent) i=-1;
 
@@ -84,21 +93,63 @@ int maxFlow(int s, int t){
 int main(){
 
     
-    cin>> n>>m;
+    cin>>m>>n;
 
-    graph.resize(n+1);
-    parent.resize(n+1);
-    parentEdge.resize(n+1);
+    int x, y;
+    cin>>y>>x;
 
+    graph.resize(x+y+2);
 
-    for(int i=0; i<m; i++){
-        int u, v, capacity;
-        cin>>u>>v>>capacity;
-        addEdge(u, v, capacity);
+    parent.resize(x+y+2);
+    parentEdge.resize(x+y+2);
+
+    int p;
+    cin>>p;
+
+    for(int i=0; i<p; i++){
+        int u, v;
+        cin>>u>>v;
+        addEdge(u+1, x+v, m);
     }
 
+    for(int i=0; i<y; i++){
+
+
+        addEdge(0, i+1, n);
+
+    }
+
+    for(int i=0; i<x; i++){
+        addEdge(y+1+i, x+y+1, n);
+    }
+
+
+
+    vector<vector<Edge>> org_graph=graph;
+
     int s, t;
-    cin>>s>>t;
+    s=0;
+    t=x+y+1;
 
     cout<<maxFlow(s, t)<<endl;
+
+
+    for(int i=1; i<=y; i++){
+
+        for(auto &e : org_graph[i]){
+
+            auto &f=give_edge1(i, e.v);
+
+            int flow=e.capacity-f.capacity;
+
+            if(flow > 0) printf("(%d,%d) -> %d dances\n", i - 1, e.v - y - 1, flow);
+            
+
+
+        }
+
+
+    }
+
+
 }

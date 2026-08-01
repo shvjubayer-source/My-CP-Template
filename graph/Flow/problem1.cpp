@@ -5,6 +5,7 @@ struct Edge{
     int v, capacity, rev;
 };
 
+
 vector<vector<Edge>> graph;
 vector<int> parent;
 vector<int> parentEdge;
@@ -14,16 +15,6 @@ void addEdge(int u, int v, int cap){
     graph[u].push_back({v, cap, (int)graph[v].size()});
     graph[v].push_back({u, 0, (int)graph[u].size()-1});
 }
-
-Edge* give_edge1(int u, int v){
-    for(auto &e : graph[u]){
-        if(e.v == v)
-            return &e;
-    }
-
-    return nullptr;
-}
-
 
 bool bfs(int s, int t){
     for(auto &i:parent) i=-1;
@@ -83,22 +74,24 @@ int maxFlow(int s, int t){
 
 int main(){
 
-    
+
     cin>> n>>m;
 
     graph.resize(n+1);
     parent.resize(n+1);
     parentEdge.resize(n+1);
 
-
-    for(int i=0; i<m; i++){
+    while(m--){
         int u, v, capacity;
         cin>>u>>v>>capacity;
+
         addEdge(u, v, capacity);
     }
 
     int s, t;
-    cin>>s>>t;
+    // cin>>s>>t;
+    s=0;
+    t=n-1;
 
     cout<<maxFlow(s, t)<<endl;
 }
