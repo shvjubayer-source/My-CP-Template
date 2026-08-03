@@ -95,7 +95,6 @@ bool findPath(int u, vector<int>& path){
             if(findPath(e.v,path))
                 return true;
 
-            // backtrack
             e.capacity=0;
         }
     }
